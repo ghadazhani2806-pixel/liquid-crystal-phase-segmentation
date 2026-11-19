@@ -1,68 +1,78 @@
-# Deep Learning for Liquid Crystal Phase Recognition and Texture Segmentation
+# Reconnaissance et segmentation des phases des cristaux liquides par apprentissage profond
 
-## Project Overview
+*Deep Learning for Liquid Crystal Phase Recognition and Texture Segmentation*
 
-This project explores the use of deep learning and computer vision to recognize and segment liquid crystal phases from polarized-light microscopy images.
+## 1. Présentation du projet
 
-The objective is to identify two phases in images of liquid crystal 9BA4:
+Ce projet porte sur l'application de l'apprentissage profond et de la vision par ordinateur à l'analyse d'images microscopiques de cristaux liquides observées sous lumière polarisée.
 
-- **SmC:** Smectic C phase (background).
-- **Cr:** Crystalline phase (target segmentation class).
+L'objectif est de réaliser une segmentation sémantique permettant de distinguer deux phases du cristal liquide 9BA4 :
 
-The task is formulated as a binary semantic segmentation problem, where each pixel is classified as either SmC or Cr.
+- **SmC :** phase smectique C, considérée comme l'arrière-plan.
+- **Cr :** phase cristalline, correspondant à la classe d'intérêt.
 
-## Models
+Le problème est formulé comme une tâche de segmentation binaire, dans laquelle chaque pixel de l'image est associé à l'une des deux classes.
 
-Two deep learning architectures are implemented and compared:
+## 2. Architectures étudiées
 
-- **U-Net:** A convolutional encoder-decoder architecture designed for image segmentation.
-- **ResNet18-U-Net:** A U-Net architecture using a ResNet18 encoder initialized with pretrained ImageNet weights.
+Deux architectures de Deep Learning sont implémentées et comparées :
 
-The comparison considers segmentation quality, computational cost, and inference speed.
+- **U-Net :** architecture convolutive de type encodeur-décodeur, conçue pour la segmentation d'images.
+- **ResNet18-U-Net :** architecture U-Net utilisant un encodeur ResNet18 initialisé avec des poids préentraînés sur ImageNet.
 
-## Dataset and Preprocessing
+La comparaison porte sur la qualité de segmentation, le coût computationnel et la rapidité d'inférence.
 
-The project uses polarized-light microscopy images of liquid crystal 9BA4.
+## 3. Jeu de données et prétraitement
 
-The dataset includes synthetic composite images in which crystalline texture fragments are overlaid onto SmC textures. Consequently, the evaluation should be interpreted in the context of this dataset and its synthetic image-generation process.
+Le projet utilise des images microscopiques de cristaux liquides 9BA4 observées sous lumière polarisée.
 
-Preprocessing includes:
-- Image resizing to 256 × 256 pixels.
-- RGB image input.
-- Binary mask conversion.
-- Image normalization.
-- Data augmentation through flips, rotations, and brightness variations.
+Le jeu de données comprend des images composites synthétiques, obtenues en superposant des fragments de textures cristallines sur des textures SmC. Cette particularité est prise en compte dans l'interprétation des résultats.
 
-Dataset split:
-- Training: 16,200 image-mask pairs.
-- Internal validation: 1,799 pairs.
-- Official validation: 2,000 pairs.
+Les principales étapes de prétraitement sont :
 
-## Experimental Results
+- Redimensionnement des images en 256 × 256 pixels.
+- Utilisation d'images RGB.
+- Conversion des masques en segmentation binaire.
+- Normalisation des images.
+- Augmentation des données par retournements, rotations et variations de luminosité.
 
-Both models were trained for 8 epochs using the same initial learning rate (3 × 10⁻⁴).
+### Répartition des données
 
-### Official Validation Results
+| Ensemble | Nombre de paires image-masque |
+|---|---:|
+| Entraînement | 16 200 |
+| Validation interne | 1 799 |
+| Validation officielle | 2 000 |
 
-| Metric (Cr class) | U-Net | ResNet18-U-Net |
+## 4. Résultats expérimentaux
+
+Les deux architectures ont été entraînées pendant 8 époques avec un taux d'apprentissage initial identique de 3 × 10⁻⁴.
+
+### Évaluation sur l'ensemble de validation officielle
+
+Les métriques suivantes concernent la classe cristalline Cr.
+
+| Métrique | U-Net | ResNet18-U-Net |
 |---|---:|---:|
-| Dice | 0.998219 | 0.997632 |
-| IoU | 0.996444 | 0.995275 |
-| Precision | 0.998110 | 0.998897 |
-| Recall | 0.998327 | 0.996370 |
-| Training time | 2031.69 s | 1757.25 s |
-| Inference time / image | 11.00 ms | 9.27 ms |
-| Trainable parameters | 7.76 M | 14.03 M |
+| Dice | 0,998219 | 0,997632 |
+| IoU | 0,996444 | 0,995275 |
+| Précision | 0,998110 | 0,998897 |
+| Rappel | 0,998327 | 0,996370 |
+| Temps d'entraînement | 2031,69 s | 1757,25 s |
+| Temps d'inférence / image | 11,00 ms | 9,27 ms |
+| Paramètres entraînables | 7,76 M | 14,03 M |
 
-### Initial Interpretation
+### Interprétation
 
-U-Net achieved higher Dice and IoU scores, as well as higher recall, while using fewer trainable parameters.
+Les résultats montrent que les deux modèles obtiennent des performances très élevées sur l'ensemble de validation officielle.
 
-ResNet18-U-Net achieved higher precision and a shorter measured inference time.
+U-Net présente de meilleurs scores Dice, IoU et rappel, tout en utilisant moins de paramètres entraînables.
 
-These results show that both architectures perform very well on the official validation split. However, further testing on naturally occurring crystalline boundaries would be necessary to assess generalization beyond the synthetic composites.
+ResNet18-U-Net obtient une meilleure précision et un temps d'inférence mesuré plus court.
 
-## Project Structure
+Ces résultats doivent toutefois être interprétés en tenant compte de la nature synthétique des images composites. Des évaluations complémentaires sur des frontières cristallines naturellement observées seraient nécessaires pour étudier la généralisation des modèles à des situations expérimentales plus variées.
+
+## 5. Structure du projet
 
 ```text
 liquid-crystal-phase-segmentation/
@@ -82,11 +92,10 @@ liquid-crystal-phase-segmentation/
 └── README.md
 ```
 
-## Technologies
+## 6. Technologies utilisées
 
 - Python
-- PyTorch
-- Torchvision
+- PyTorch et Torchvision
 - OpenCV
 - NumPy
 - Matplotlib
@@ -94,20 +103,20 @@ liquid-crystal-phase-segmentation/
 - Gradio
 - Google Colab
 
-## Interactive Application
+## 7. Application interactive
 
-A Gradio application was developed to allow users to upload microscopy images, select a segmentation model, and visualize the predicted crystalline regions.
+Une application interactive développée avec Gradio permet de charger une image microscopique, de sélectionner l'un des deux modèles et de visualiser la segmentation prédite de la phase cristalline.
 
-The application source code will be included in the `app/` directory.
+Le code source de cette application sera disponible dans le dossier `app/`.
 
-## Project Status
+## 8. État d'avancement
 
-The two segmentation models have been trained and evaluated. Model checkpoints, experimental results, and the Colab notebook are preserved in Google Drive.
+Les deux architectures ont été entraînées et évaluées. Les modèles sauvegardés, les résultats expérimentaux et le notebook Google Colab sont conservés sur Google Drive.
 
-The GitHub repository is being organized to document the implementation and share the project code.
+Le dépôt GitHub est destiné à centraliser le code source, la documentation et les résultats du projet.
 
-## Author
+## 9. Auteure
 
 **Ghada Zhani**  
-Software Engineering Student  
-ISSAT Sousse – University of Sousse
+Étudiante en deuxième année du cycle ingénieur en Génie Logiciel  
+ISSAT Sousse – Université de Sousse
