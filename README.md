@@ -71,4 +71,43 @@ liquid-crystal-phase-segmentation/
 │   └── README.md
 │
 ├── app/
-│   └── README
+│   └── README.md
+│
+├── results/
+│   └── README.md
+│
+├── docs/
+│   └── README.md
+│
+└── README.md
+```
+
+## Technologies
+
+- Python
+- PyTorch
+- Torchvision
+- OpenCV
+- NumPy
+- Matplotlib
+- Scikit-learn
+- Gradio
+- Google Colab
+
+## Interactive Application
+
+A Gradio application was developed to allow users to upload microscopy images, select a segmentation model, and visualize the predicted crystalline regions.
+
+The application source code will be included in the `app/` directory.
+
+## Project Status
+
+The two segmentation models have been trained and evaluated. Model checkpoints, experimental results, and the Colab notebook are preserved in Google Drive.
+
+The GitHub repository is being organized to document the implementation and share the project code.
+
+## Author
+
+**Ghada Zhani**  
+Software Engineering Student  
+ISSAT Sousse – University of Sousse
