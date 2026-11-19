@@ -1,0 +1,21 @@
+# Données du projet
+data/
+dataset/
+datasets/
+
+# Checkpoints et modèles entraînés
+*.pth
+*.pt
+*.ckpt
+checkpoints/
+
+# Environnement Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Configuration locale et secrets
+.env
+*.pem
